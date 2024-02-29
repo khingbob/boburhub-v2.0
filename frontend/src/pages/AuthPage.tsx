@@ -3,13 +3,13 @@ import { useContext } from "react";
 import { ThemeContext } from "../theme/CustomThemeProvider.tsx";
 
 export function AuthPage() {
-  const { theme, setTheme } = useContext(ThemeContext);
+  const { theme, setThemeMode } = useContext(ThemeContext);
   const toggleTheme = () => {
-    setTheme(theme === "light" ? "dark" : "light");
+    setThemeMode(theme.palette.mode === "light" ? "dark" : "light");
   };
   return (
     <Box>
-      <Typography variant="h3">Auth Page</Typography>
+      <Typography variant="h3">Welcome to BOBUR HUB</Typography>
       <Button variant="contained" color="primary" onClick={toggleTheme}>
         Login
       </Button>

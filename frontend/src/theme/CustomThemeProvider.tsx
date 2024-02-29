@@ -1,32 +1,37 @@
 import { createContext, ReactNode, useState } from "react";
-import { createTheme, ThemeProvider } from "@mui/material";
+import { createTheme, Theme, ThemeProvider } from "@mui/material";
 
-type ThemeType = "light" | "dark";
-
-export type ThemeContextType = {
-  theme: "light" | "dark";
-  setTheme: (theme: ThemeType) => void;
+type ThemeContextType = {
+  theme: Theme;
+  setThemeMode: (theme: "light" | "dark") => void;
 };
+const defaultTheme = createTheme({ palette: { mode: "dark" } });
 export const ThemeContext = createContext<ThemeContextType>({
-  theme: "dark",
-  setTheme: () => {},
+  theme: defaultTheme,
+  setThemeMode: () => {},
 });
 
-const darkThemePallet = createTheme({ palette: { mode: "dark" } });
+const darkThemePallet = createTheme({
+  palette: { mode: "dark", background: { default: "#141414", paper: "red" } },
+});
 const lightThemePallet = createTheme({ palette: { mode: "light" } });
-
-const themeMap = { light: lightThemePallet, dark: darkThemePallet };
 
 export function CustomThemeProvider({
   children,
 }: {
   readonly children: ReactNode;
 }) {
-  const [theme, setTheme] = useState<ThemeType>("dark");
+  const [theme, setTheme] = useState(defaultTheme);
+
+  const setThemeMode = (theme: "light" | "dark") => {
+    setTheme(theme == "light" ? lightThemePallet : darkThemePallet);
+  };
+
+  document.body.style.transition = theme.transitions.create("background-color");
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme }}>
-      <ThemeProvider theme={themeMap[theme]}>{children}</ThemeProvider>
+    <ThemeContext.Provider value={{ theme, setThemeMode }}>
+      <ThemeProvider theme={theme}>{children}</ThemeProvider>
     </ThemeContext.Provider>
   );
 }
