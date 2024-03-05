@@ -1,18 +1,20 @@
-import { Box, Button, Typography } from "@mui/material";
-import { useContext } from "react";
-import { ThemeContext } from "../theme/CustomThemeProvider.tsx";
-
+import { Paper, Stack, Typography } from "@mui/material";
+import { Brand } from "../components/Brand.tsx";
 export function AuthPage() {
-  const { theme, setThemeMode } = useContext(ThemeContext);
-  const toggleTheme = () => {
-    setThemeMode(theme.palette.mode === "light" ? "dark" : "light");
-  };
   return (
-    <Box>
-      <Typography variant="h3">Welcome to BOBUR HUB</Typography>
-      <Button variant="contained" color="primary" onClick={toggleTheme}>
-        Login
-      </Button>
-    </Box>
+    <Stack alignItems="center" gap={3} p={3} sx={{ width: "100%" }}>
+      <Typography variant="h3" fontWeight={400} align="center">
+        Welcome to <Brand variant="h4" />
+      </Typography>
+      <Paper
+        elevation={24}
+        variant="outlined"
+        sx={{ height: "85vh", width: "70%", p: 5 }}
+      >
+        <Stack alignItems="center">
+          <Brand service="logo" sx={{ fontSize: 30 }} />
+        </Stack>
+      </Paper>
+    </Stack>
   );
 }
