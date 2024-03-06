@@ -42,9 +42,12 @@ const darkThemePallet = responsiveFontSizes(
   createTheme({
     palette: {
       mode: "dark",
-      background: { default: "#141414", paper: "#2c2c2c" },
+      background: { default: "#141414", paper: "rgb(34 34 34)" },
       primary: {
         main: "#ffda00",
+      },
+      input: {
+        main: "#333333",
       },
     },
     ...customProps,
