@@ -19,7 +19,10 @@ export function Brand({
   };
   if (service === "logo") {
     return (
-      <Typography sx={{ ...serviceSx, ...sx, px: 1.5, py: 1 }} {...other}>
+      <Typography
+        sx={{ px: 1.5, py: 1, userSelect: "none", ...serviceSx, ...sx }}
+        {...other}
+      >
         BH
       </Typography>
     );
@@ -28,7 +31,7 @@ export function Brand({
     <Typography
       component="span"
       noWrap
-      sx={{ fontWeight: 1000, ...sx }}
+      sx={{ fontWeight: 1000, userSelect: "none", ...sx }}
       {...other}
     >
       {service !== "logo" && "BOBUR"}{" "}

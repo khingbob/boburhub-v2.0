@@ -1,24 +1,28 @@
 import {
   Button,
   Checkbox,
-  Divider,
   FormControlLabel,
   IconButton,
   Paper,
   Popover,
   Stack,
-  styled,
-  TextField,
   Typography,
-  useTheme,
 } from "@mui/material";
-import { Brand } from "../components/Brand.tsx";
+import { Brand } from "../../../components/Brand.tsx";
 import { Apple, Facebook, Google, HelpOutlined } from "@mui/icons-material";
 import { useState } from "react";
-export function AuthPage() {
+import { InputBar } from "../../../components/InputBar.tsx";
+import { CustomPaper } from "../../../components/CustomPaper.tsx";
+
+export function SignIn({
+  getFieldProps,
+  goNext,
+}: {
+  getFieldProps?: any;
+  goNext?: () => void;
+}) {
   const [anchor, setAnchor] = useState<HTMLElement | null>(null);
   const [open, setOpen] = useState(false);
-
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchor(event.currentTarget);
     setOpen(!open);
@@ -26,39 +30,24 @@ export function AuthPage() {
   const handleClose = () => {
     setOpen(false);
   };
-
-  const theme = useTheme();
-  const InputBar = styled(TextField)({
-    "& .MuiInputBase-root": {
-      backgroundColor: theme.palette.input.main,
-    },
-  });
-
   return (
-    <Stack alignItems="center" spacing={5} p={3} sx={{ width: "100%" }}>
-      <Typography variant="h3" fontWeight={400} align="center">
+    <>
+      <Typography variant="h3" fontWeight={400} align="center" p={5}>
         Welcome to <Brand variant="h4" />
       </Typography>
-      <Stack alignItems="center" spacing={8}>
-        <Paper
-          elevation={20}
-          variant="outlined"
-          sx={{
-            maxWidth: "500px",
-            minWidth: "400px",
-            width: "50%",
-            pt: 3,
-            pb: 5,
-            px: 3,
-            boxShadow: "0 6px 20px -4px black",
-          }}
-        >
+      <Stack alignItems="center" spacing={"7vh"} width={"100%"}>
+        <CustomPaper>
           <Stack alignItems="center">
-            <Brand service="logo" variant="h2" sx={{ mb: 3 }} />
-            <Typography variant="h3" align="center" sx={{ fontWeight: 500 }}>
-              Sign in
+            <Brand service="logo" variant="h1" sx={{ mb: 2 }} />
+            <Typography variant="h6" align="center" sx={{ fontWeight: 500 }}>
+              Sign in with your <Brand service="ID" variant="body1" />
             </Typography>
-            <InputBar label="Phone or email" margin="normal" fullWidth />
+            <InputBar
+              label="Phone or email"
+              margin="normal"
+              fullWidth
+              {...getFieldProps("email")}
+            />
             <Stack
               direction="row"
               alignItems="center"
@@ -69,8 +58,8 @@ export function AuthPage() {
                 control={<Checkbox disableRipple />}
                 sx={{ mr: 0 }}
               />
-              <IconButton onClick={handleClick} disableRipple>
-                <HelpOutlined fontSize="small" />
+              <IconButton onClick={handleClick} disableRipple sx={{ pl: 0.2 }}>
+                <HelpOutlined sx={{ fontSize: "1.1rem" }} />
               </IconButton>
             </Stack>
             <Popover
@@ -87,11 +76,11 @@ export function AuthPage() {
                 quick login on this device
               </Typography>
             </Popover>
-            <Button variant="contained" fullWidth>
+            <Button variant="contained" fullWidth onClick={goNext}>
               Sign in
             </Button>
           </Stack>
-        </Paper>
+        </CustomPaper>
         <Stack direction="row" alignItems="center" spacing={4}>
           <Paper elevation={5}>
             <Button color="inherit">
@@ -109,11 +98,11 @@ export function AuthPage() {
             </Button>
           </Paper>
         </Stack>
-        <Stack direction="row" alignItems="center" gap={1}>
+        <Stack direction="row" alignItems="center" gap={2}>
           <Typography variant="subtitle1">Don't have an account?</Typography>
           <Button variant="outlined">Sign up</Button>
         </Stack>
       </Stack>
-    </Stack>
+    </>
   );
 }

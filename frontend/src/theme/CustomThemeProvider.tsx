@@ -32,9 +32,12 @@ const customProps = {
     h6: {
       fontSize: "1.5rem",
     },
+    body1: {
+      fontSize: "1.3rem",
+    },
   },
   shape: {
-    borderRadius: 5,
+    borderRadius: 7,
   },
 };
 
@@ -45,6 +48,9 @@ const darkThemePallet = responsiveFontSizes(
       background: { default: "#141414", paper: "rgb(34 34 34)" },
       primary: {
         main: "#ffda00",
+      },
+      error: {
+        main: "#ff8d84",
       },
       input: {
         main: "#333333",
