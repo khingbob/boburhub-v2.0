@@ -55,6 +55,11 @@ const darkThemePallet = responsiveFontSizes(
       input: {
         main: "#333333",
       },
+      text: {
+        primary: "rgba(255, 255, 255, 1)",
+        secondary: "rgba(255, 255, 255, 0.7)",
+        disabled: "rgba(255, 255, 255, 0.5)",
+      },
     },
     ...customProps,
   }),
@@ -79,7 +84,7 @@ export function CustomThemeProvider({
 
   const [theme, setTheme] = useState(systemThemePallete);
 
-  console.log(theme);
+  console.log("Theme: ", theme);
 
   const setThemeMode = (theme: "light" | "dark") => {
     setTheme(theme == "light" ? lightThemePallet : darkThemePallet);

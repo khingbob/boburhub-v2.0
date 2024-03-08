@@ -1,11 +1,22 @@
-import { styled, TextField, useTheme } from "@mui/material";
+import { SxProps, TextField, useTheme } from "@mui/material";
 
-export function InputBar(props: any) {
+export function InputBar({
+  sx,
+  ...props
+}: {
+  sx?: SxProps;
+  [key: string]: any;
+}) {
   const theme = useTheme();
-  const InputBar = styled(TextField)({
-    "& .MuiInputBase-root": {
-      backgroundColor: theme.palette.input?.main,
-    },
-  });
-  return <InputBar {...props} />;
+  return (
+    <TextField
+      sx={{
+        "& .MuiInputBase-root": {
+          backgroundColor: theme.palette.input?.main,
+        },
+        ...sx,
+      }}
+      {...props}
+    />
+  );
 }

@@ -13,13 +13,6 @@ export function CustomPaper({
     <Paper
       variant="outlined"
       sx={{
-        width: {
-          xs: "80%",
-          sm: "60%",
-          md: "40%",
-          lg: "30%",
-        },
-        maxWidth: "xl",
         pt: 3,
         pb: 5,
         px: 3,
