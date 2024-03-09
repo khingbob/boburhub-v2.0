@@ -1,31 +1,39 @@
 import { Stack, Typography } from "@mui/material";
 import { InputBar } from "../../../../components/InputBar.tsx";
-import { ChangeEvent, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 export function Phone() {
   const [code, setCode] = useState(new Array(5).fill(""));
-  const codeRefs = useRef<HTMLElement[]>([]);
+  const codeRefs = useRef<HTMLInputElement[]>([]);
 
   const verifyCode = (code: string) => {
     alert(code);
   };
-  const handleChange = (index: number, e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value.length > 1) {
-      e.target.value = e.target.value[index];
+  const handleClick = (index: number, e: KeyboardEvent) => {
+    if (e.key === "Backspace" && index > 0) {
+      if (codeRefs.current[index].value.length > 0) {
+        setCode(code.map((digit, i) => (i === index ? "" : digit)));
+        codeRefs.current[index - 1].focus();
+        return;
+      } else {
+        setCode(code.map((digit, i) => (i === index - 1 ? "" : digit)));
+        codeRefs.current[index - 1].focus();
+        return;
+      }
+    }
+
+    setCode(code.map((digit, i) => (index === i ? e.key : digit)));
+
+    if (index === code.length - 1) {
+      verifyCode(code.join("") + e.key);
       return;
     }
-    setCode(code.map((digit, i) => (index === i ? e.target.value : digit)));
-    if (e.target.value.length == 1 && index < code.length - 1) {
-      codeRefs.current[index + 1].focus();
-    }
-    if (index === code.length - 1) {
-      verifyCode(code.join("") + e.target.value);
-    }
+    codeRefs.current[index + 1].focus();
   };
 
   return (
     <Stack alignItems="center">
-      <Typography variant="h5" align="center" sx={{ fontWeight: 500 }}>
+      <Typography variant="h5" align="center" sx={{ fontWeight: 500, mt: 3 }}>
         Enter notification code
       </Typography>
       <Typography
@@ -33,7 +41,7 @@ export function Phone() {
         color={"text.secondary"}
         align="center"
         mt={1}
-        mb={2}
+        mb={4}
       >
         We sent a code to your phone number
       </Typography>
@@ -42,14 +50,13 @@ export function Phone() {
           return (
             <InputBar
               autoFocus={index === 0}
-              inputProps={{
-                max: 9,
-                inputMode: "numeric",
-              }}
-              inputRef={(el: HTMLElement) => (codeRefs.current[index] = el)}
+              inputRef={(el: HTMLInputElement) =>
+                (codeRefs.current[index] = el)
+              }
+              inputProps={{ inputMode: "numeric" }}
               key={index}
-              onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                handleChange(index, e);
+              onKeyDown={(e: KeyboardEvent) => {
+                handleClick(index, e);
               }}
               type={"number"}
               size={"small"}

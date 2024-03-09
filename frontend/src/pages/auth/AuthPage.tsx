@@ -38,7 +38,7 @@ export function AuthPage() {
 
   const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
-  const phoneRegex = /^\+?[1-9]\d{1,14}$/;
+  const phoneRegex = /^\+[1-9]\d{1,14}$/;
 
   const formik = useFormik({
     initialValues: {
@@ -47,8 +47,8 @@ export function AuthPage() {
       phone: "",
       password: "",
     },
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: () => {
+      goNext();
     },
   });
 
@@ -98,7 +98,7 @@ export function AuthPage() {
     if (!firstRender.current && !fadeIn.state) {
       setTimeout(() => {
         setStage(stage + (fadeIn.direction === "next" ? 1 : -1));
-      }, fadeIn.timeout * 0.7);
+      }, fadeIn.timeout * 0.8);
       setTimeout(() => {
         setFadeIn({ ...fadeIn, state: true });
       }, fadeIn.timeout * 1.2);
