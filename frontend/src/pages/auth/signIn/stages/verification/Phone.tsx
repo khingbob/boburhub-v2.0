@@ -1,33 +1,38 @@
 import { Stack, Typography } from "@mui/material";
-import { InputBar } from "../../../../components/InputBar.tsx";
+import { InputBar } from "../../../../../components/InputBar.tsx";
 import { useRef, useState } from "react";
 
 export function Phone() {
-  const [code, setCode] = useState(new Array(5).fill(""));
+  const [code, setCode] = useState(new Array(6).fill(""));
   const codeRefs = useRef<HTMLInputElement[]>([]);
 
   const verifyCode = (code: string) => {
-    alert(code);
+    console.log(code);
   };
   const handleClick = (index: number, e: KeyboardEvent) => {
-    if (e.key === "Backspace" && index > 0) {
-      if (codeRefs.current[index].value.length > 0) {
-        setCode(code.map((digit, i) => (i === index ? "" : digit)));
+    const copy = [...code];
+    if (e.key === "Backspace") {
+      if (index > 0) {
         codeRefs.current[index - 1].focus();
-        return;
-      } else {
-        setCode(code.map((digit, i) => (i === index - 1 ? "" : digit)));
-        codeRefs.current[index - 1].focus();
-        return;
       }
-    }
-
-    setCode(code.map((digit, i) => (index === i ? e.key : digit)));
-
-    if (index === code.length - 1) {
-      verifyCode(code.join("") + e.key);
+      copy[index] = "";
+      setCode(copy);
       return;
     }
+
+    if (isNaN(Number(e.key))) {
+      return;
+    }
+
+    if (copy[index] === "") {
+      copy[index] = e.key;
+    }
+    setCode(copy);
+    if (index === code.length - 1) {
+      verifyCode(copy.join(""));
+      return;
+    }
+
     codeRefs.current[index + 1].focus();
   };
 

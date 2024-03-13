@@ -8,23 +8,25 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { Brand } from "../../../components/Brand.tsx";
+import { Brand } from "../../../../components/Brand.tsx";
 import { HelpOutlined } from "@mui/icons-material";
 import React, { useState } from "react";
-import { InputBar } from "../../../components/InputBar.tsx";
-import { FadeIn } from "../AuthPage.tsx";
+import { InputBar } from "../../../../components/InputBar.tsx";
+import { FormikSchema } from "../SignIn.tsx";
+import { useFormikContext } from "formik";
+import { FadeType } from "../../AuthenticationPage.tsx";
 
-export function SignIn({
+export function EmailPhone({
   getFieldProps,
-  goNext,
-  fadeIn,
+  fade,
 }: {
   getFieldProps?: any;
   goNext?: () => void;
-  fadeIn?: FadeIn;
+  fade?: FadeType;
 }) {
   const [anchor, setAnchor] = useState<HTMLElement | null>(null);
   const [open, setOpen] = useState(false);
+  const formik = useFormikContext<FormikSchema>();
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchor(event.currentTarget);
@@ -35,12 +37,17 @@ export function SignIn({
   };
 
   return (
-    <Fade in={fadeIn?.state ?? false} timeout={fadeIn?.timeout ?? 0}>
-      <div>
-        <Typography variant="h6" align="center" sx={{ fontWeight: 500 }}>
+    <Fade in={fade?.state ?? false} timeout={fade?.timeout ?? 0}>
+      <div style={{ width: "100%", height: "100%" }}>
+        <Typography
+          variant="h6"
+          align="center"
+          sx={{ fontWeight: 500, pt: 2, pb: 1 }}
+        >
           Sign in with your <Brand service="ID" variant="body1" />
         </Typography>
         <InputBar
+          autoFocus
           label="Phone or email"
           margin="normal"
           fullWidth
@@ -54,10 +61,12 @@ export function SignIn({
           <FormControlLabel
             label="Save user"
             control={<Checkbox disableRipple />}
-            sx={{ mr: 0 }}
+            sx={{ mr: 0, color: "text.secondary" }}
           />
           <IconButton onClick={handleClick} disableRipple sx={{ pl: 0.2 }}>
-            <HelpOutlined sx={{ fontSize: "1.1rem" }} />
+            <HelpOutlined
+              sx={{ fontSize: "1.1rem", color: "text.secondary" }}
+            />
           </IconButton>
         </Stack>
         <Popover
@@ -74,7 +83,13 @@ export function SignIn({
             login on this device
           </Typography>
         </Popover>
-        <Button variant="contained" fullWidth onClick={goNext}>
+        <Button
+          variant="contained"
+          fullWidth
+          onClick={() => {
+            formik.handleSubmit();
+          }}
+        >
           Sign in
         </Button>
       </div>

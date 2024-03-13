@@ -8,22 +8,19 @@ import "@fontsource/roboto/700.css";
 import { CustomThemeProvider } from "./theme/CustomThemeProvider.tsx";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { VerificationMethodContextProvider } from "./pages/auth/stages/verification/VerificationMethodContextProvider.tsx";
 
 function App() {
-  const user = null;
+  const user = false;
   const navigate = useNavigate();
   useEffect(() => {
     if (!user) {
-      navigate("/auth");
+      navigate("/auth/signin");
     }
   }, []);
   return (
     <CustomThemeProvider>
-      <VerificationMethodContextProvider>
-        <CssBaseline />
-        <Router />
-      </VerificationMethodContextProvider>
+      <CssBaseline />
+      <Router />
     </CustomThemeProvider>
   );
 }
