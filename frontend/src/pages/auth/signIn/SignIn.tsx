@@ -111,7 +111,6 @@ export function SignIn({
       }
     }
 
-    console.log(`Fade: ${fade.state} -> false`);
     setFade({
       ...fade,
       state: false,
@@ -129,21 +128,24 @@ export function SignIn({
 
   useEffect(() => {
     document.title = "BH | Welcome!";
+    setPaperSx(stages[stage].sx);
   }, []);
 
   useEffect(() => {
     if (!firstRender.current && !fade.state) {
       const one = fade.direction === "next" ? 1 : -1;
       setTimeout(() => {
-        setStage(stage + one);
-        setHeader(stages[stage + one].header);
+        if (fade.direction !== "signUp") {
+          setStage(stage + one);
+          setHeader(stages[stage + one].header);
+        }
         setPaperSx(
           stages[stage + one].children?.[method].sx ?? stages[stage + one].sx,
         );
+      }, fade.timeout * 0.7);
+      setTimeout(() => {
         setFade({ ...fade, state: true });
-      }, fade.timeout * 0.4);
-      // setTimeout(() => {
-      // }, fade.timeout * 1.9);
+      }, fade.timeout * 0.7);
     }
   }, [fade]);
 
@@ -154,7 +156,8 @@ export function SignIn({
           <IconButton
             sx={{
               position: "absolute",
-              top: "30px",
+              top: { xs: "auto", sm: "30px" },
+              bottom: { xs: "20px", sm: "auto" },
               left: "5%",
             }}
             onClick={goBack}

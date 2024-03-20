@@ -3,7 +3,7 @@ import { InputBar } from "../../../../../components/InputBar.tsx";
 import { useRef, useState } from "react";
 
 export function Phone() {
-  const [code, setCode] = useState(new Array(6).fill(""));
+  const [code, setCode] = useState(new Array(5).fill(""));
   const codeRefs = useRef<HTMLInputElement[]>([]);
 
   const verifyCode = (code: string) => {
@@ -50,7 +50,12 @@ export function Phone() {
       >
         We sent a code to your phone number
       </Typography>
-      <Stack direction="row" alignItems="center" spacing={2} width={"70%"}>
+      <Stack
+        direction="row"
+        alignItems="center"
+        spacing={{ xs: 2 }}
+        width={"100%"}
+      >
         {code.map((_, index) => {
           return (
             <InputBar
@@ -66,16 +71,13 @@ export function Phone() {
               type={"number"}
               size={"small"}
               sx={{
-                fontSize: "h1",
-                width: "5rem",
-                "& input": { textAlign: "center", fontSize: "2rem" },
-                "& input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button":
-                  {
-                    WebkitAppearance: "none",
-                    margin: 0,
+                width: { xs: "3.5rem", sm: "3.5rem" },
+                height: { xs: "4.5rem", sm: "5rem" },
+                "& input": {
+                  textAlign: "center",
+                  fontSize: {
+                    xs: "2rem",
                   },
-                "& input[type=number]": {
-                  MozAppearance: "textfield",
                 },
               }}
               value={code[index]}

@@ -7,4 +7,7 @@ declare module "@mui/material/styles" {
   interface PaletteOptions {
     input?: PaletteColorOptions;
   }
+  interface TypeBackground {
+    secondary: string;
+  }
 }

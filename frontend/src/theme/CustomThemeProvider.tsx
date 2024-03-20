@@ -45,9 +45,14 @@ const darkThemePallet = responsiveFontSizes(
   createTheme({
     palette: {
       mode: "dark",
-      background: { default: "#141414", paper: "rgb(34 34 34)" },
+      background: {
+        default: "#141414",
+        secondary: "rgb(40 40 40)",
+        paper: "rgb(34 34 34)",
+      },
       primary: {
         main: "#ffda00",
+        light: "#fcea9b",
       },
       error: {
         main: "#ff8d84",
@@ -56,9 +61,9 @@ const darkThemePallet = responsiveFontSizes(
         main: "#333333",
       },
       text: {
-        primary: "rgba(255, 255, 255, 1)",
-        secondary: "rgba(255, 255, 255, 0.7)",
-        disabled: "rgba(255, 255, 255, 0.5)",
+        primary: "rgba(255, 255, 255)",
+        secondary: "rgb(215,215,215)",
+        disabled: "rgb(136,136,136)",
       },
     },
     ...customProps,

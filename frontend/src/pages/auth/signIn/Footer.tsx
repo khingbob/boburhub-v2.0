@@ -2,7 +2,13 @@ import { Button, Fade, Paper, Stack, Typography } from "@mui/material";
 import { Apple, Facebook, Google } from "@mui/icons-material";
 import { FadeType } from "../AuthenticationPage.tsx";
 
-export function Footer({ fade }: { fade: FadeType }) {
+export function Footer({
+  fade,
+  signUp,
+}: {
+  fade: FadeType;
+  signUp: () => void;
+}) {
   return (
     <Fade in={fade.state} timeout={fade.timeout}>
       <div>
@@ -25,7 +31,9 @@ export function Footer({ fade }: { fade: FadeType }) {
         </Stack>
         <Stack direction="row" alignItems="center" gap={2}>
           <Typography variant="subtitle1">Don't have an account?</Typography>
-          <Button variant="outlined">Sign up</Button>
+          <Button variant="outlined" onClick={signUp}>
+            Sign up
+          </Button>
         </Stack>
       </div>
     </Fade>

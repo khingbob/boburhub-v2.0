@@ -23,19 +23,18 @@ interface Stage {
     };
   };
 }
+
+const emailPhonePassSx = {
+  width: {
+    xs: "80vw",
+    sm: "400px",
+  },
+  height: "430px",
+};
 export const stagesValues: Stage[] = [
   {
     tag: "email_phone",
-    sx: {
-      width: {
-        xs: "80vw",
-        sm: "400px",
-      },
-      height: {
-        xs: "420px",
-        md: "430px",
-      },
-    },
+    sx: emailPhonePassSx,
     header: (
       <>
         Welcome to <Brand variant="h4" />
@@ -45,16 +44,7 @@ export const stagesValues: Stage[] = [
   },
   {
     tag: "password",
-    sx: {
-      width: {
-        xs: "80vw",
-        sm: "400px",
-      },
-      height: {
-        xs: "430px",
-        md: "440px",
-      },
-    },
+    sx: emailPhonePassSx,
     header: "User Verification",
     component: <Password />,
   },
@@ -71,8 +61,6 @@ export const stagesValues: Stage[] = [
             md: "35vw",
           },
           height: "38vh",
-          maxHeight: "1600px",
-          maxWidth: "1600px",
         },
         component: <Email />,
       },
@@ -80,11 +68,12 @@ export const stagesValues: Stage[] = [
         sx: {
           width: {
             xs: "80vw",
-            md: "35vw",
+            sm: "400px",
           },
-          height: "38vh",
-          maxHeight: "1600px",
-          maxWidth: "1600px",
+          height: {
+            xs: "350px",
+            sm: "360px",
+          },
         },
         component: <Phone />,
       },
