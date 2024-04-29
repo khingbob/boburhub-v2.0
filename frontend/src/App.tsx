@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
 function App() {
-  const user = false;
+  const user = true;
   const navigate = useNavigate();
   useEffect(() => {
     if (!user) {

@@ -1,0 +1,16 @@
+version: "3.8"
+services:
+  dev-db:
+    image: postgres:13
+    ports:
+      - 9696:5432
+    environment:
+      - POSTGRES_USER=bobur
+      - POSTGRES_PASSWORD=2804
+      - POSTGRES_DB = boburhub-db
+    networks:
+      - BOBURHUB
+
+networks:
+  BOBURHUB:
+ 

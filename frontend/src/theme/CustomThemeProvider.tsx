@@ -35,6 +35,9 @@ const customProps = {
     body1: {
       fontSize: "1.3rem",
     },
+    body2: {
+      fontSize: "1.1rem",
+    },
   },
   shape: {
     borderRadius: 7,
@@ -67,10 +70,10 @@ const darkThemePallet = responsiveFontSizes(
       },
     },
     ...customProps,
-  }),
+  })
 );
 const lightThemePallet = responsiveFontSizes(
-  createTheme({ palette: { mode: "light" }, ...customProps }),
+  createTheme({ palette: { mode: "light" }, ...customProps })
 );
 
 export const ThemeContext = createContext<ThemeContextType>({

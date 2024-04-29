@@ -4,18 +4,16 @@ import { CustomPaper } from "../../components/CustomPaper.tsx";
 import { Brand } from "../../components/Brand.tsx";
 import { useNavigate } from "react-router-dom";
 import { Footer } from "./signIn/Footer.tsx";
-import { SignIn } from "./signIn/SignIn.tsx";
-import { SignUp } from "./singUp/SignUp.tsx";
 import { stagesValues } from "./signIn/stages/stages.tsx";
 import { signUpSx } from "./singUp/signUpSx.ts";
 import { SignUpDescription } from "./singUp/SignUpDescription.tsx";
+import { SignUpForm } from "./singUp/SignUpForm.tsx";
 
 export type FadeType = {
   state: boolean;
   timeout: number;
   direction: "next" | "back" | "signUp";
 };
-
 export const isValidPass = (pass: string) => {
   if (pass.length < 6) return "Password must be at least 6 characters long";
   if (pass === pass.toLowerCase())
@@ -32,7 +30,6 @@ export const isValidPass = (pass: string) => {
 export function AuthenticationPage() {
   const navigate = useNavigate();
   const path = window.location.pathname;
-  const isSignup = path === "/auth/signup";
   const [fade, setFade] = useState<FadeType>({
     timeout: 300,
     state: true,
@@ -42,11 +39,11 @@ export function AuthenticationPage() {
   const [header, setHeader] = useState<ReactElement | string>(
     <>
       Welcome to <Brand variant="h4" />
-    </>,
+    </>
   );
   const [stage, setStage] = useState<number>(0);
   const [paperSx, setPaperSx] = useState<SxProps>(
-    path === "/auth/signin" ? stagesValues[0].sx : signUpSx,
+    path === "/auth/signin" ? stagesValues[0].sx : signUpSx
   );
 
   useEffect(() => {
@@ -93,35 +90,16 @@ export function AuthenticationPage() {
           ...paperSx,
         }}
       >
-        <Stack direction="row" width="100%" height="100%">
+        <Stack direction="row" flexWrap="wrap" width="100%" height="100%">
           <SignUpDescription fade={fade} />
-          <Stack
-            alignItems="center"
-            width={isSignup ? "50%" : "100%"}
-            px={{ xs: 4, sm: 5 }}
-          >
-            {!isSignup && (
-              <Brand
-                service="logo"
-                variant="h1"
-                sx={{ my: { xs: 3, sm: 4 }, fontSize: { xs: "50px" } }}
-                align="center"
-              />
-            )}
-
-            {path === "/auth/signup" ? (
-              <SignUp fade={fade} setFade={setFade} />
-            ) : (
-              <SignIn
-                stage={stage}
-                setStage={setStage}
-                fade={fade}
-                setFade={setFade}
-                setPaperSx={setPaperSx}
-                setHeader={setHeader}
-              />
-            )}
-          </Stack>
+          <SignUpForm
+            fade={fade}
+            setFade={setFade}
+            stage={stage}
+            setStage={setStage}
+            setHeader={setHeader}
+            setPaperSx={setPaperSx}
+          />
         </Stack>
       </CustomPaper>
 

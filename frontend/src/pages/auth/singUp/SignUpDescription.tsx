@@ -10,8 +10,9 @@ export function SignUpDescription({ fade }: { fade: FadeType }) {
       sx={{
         transition: "width 0.2s",
         backgroundColor: "background.secondary",
-        width: isSignup ? "50%" : 0,
-        height: "100%",
+        width: isSignup ? { xs: "100%", sm: "50%" } : 0,
+        minWidth: "x-small",
+        height: { xs: "40%", sm: "100%" },
         padding: isSignup ? { xs: 5, sm: 6 } : 0,
         p: {
           fontSize: "1.2rem",
@@ -19,13 +20,17 @@ export function SignUpDescription({ fade }: { fade: FadeType }) {
         svg: {
           fontSize: "3rem",
         },
-        spacing: 5,
         color: "text.secondary",
       }}
     >
       {window.location.pathname === "/auth/signup" && (
         <Fade in={fade.state} timeout={fade.timeout}>
-          <Stack width="100%" height="100%" spacing={10} alignItems="center">
+          <Stack
+            width="100%"
+            height="100%"
+            spacing={{ xs: 5, sm: 10 }}
+            alignItems="center"
+          >
             <Stack width="100%">
               <Brand variant="h6" color="text.primary" service="ID" />
               <Typography color="text.primary">
@@ -34,7 +39,9 @@ export function SignUpDescription({ fade }: { fade: FadeType }) {
             </Stack>
             <Stack direction="row" alignItems="center" spacing={2}>
               <AccountCircle />
-              <Typography>Single account for all BOBUR services</Typography>
+              <Typography variant="body2">
+                Single account for all BOBUR services
+              </Typography>
             </Stack>
             <Stack direction="row" alignItems="center" spacing={2}>
               <Lock />

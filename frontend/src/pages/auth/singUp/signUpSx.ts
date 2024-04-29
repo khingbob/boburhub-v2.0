@@ -4,6 +4,7 @@ export const signUpSx = {
     lg: "1200px",
   },
   height: {
-    xs: "750px",
+    xs: "1000px",
+    sm: "750px"
   },
 };

@@ -34,9 +34,9 @@ export function Brand({
       sx={{ fontWeight: 1000, userSelect: "none", ...sx }}
       {...other}
     >
-      {service !== "logo" && "BOBUR"}{" "}
+      {"BOBUR "}
       <Box component="span" sx={serviceSx}>
-        {service === "logo" ? "BH" : service ?? "HUB"}
+        {service ?? "HUB"}
       </Box>
     </Typography>
   );
